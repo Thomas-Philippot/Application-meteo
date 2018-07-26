@@ -1,6 +1,6 @@
 <template>
 	<Page class="page">
-		<ActionBar title="Météo" class="action-bar">
+		<ActionBar title="$route.path" class="action-bar">
             <android>
                 <NavigationButton ios.systemIcon="4" android.systemIcon="ic_menu_btn_add" ios.position="left" @tap="toggleDrawer" />
             </android>
@@ -15,17 +15,18 @@
 						<Label text="Navigation Menu" />
 					</StackLayout>
 					<StackLayout>
-						<Label text="Current Weather" padding="20" backgroundColor="#42b983" />
-						<Label text="Search by city name" padding="20" />
+						<Label text="Current Weather" padding="20" backgroundColor="#42b983" @tap="$router.push('/master')" />
+						<Label text="Search by city name" padding="20" @tap="$router.push('/city')"  />
 					</StackLayout>
 					<Label text="Close" color="#42b983" padding="20" style="horizontal-align: center" @tap="onCloseDrawerTap" />
 				</StackLayout>
 				<StackLayout ~mainContent class="home-panel">
                         <ScrollView>
                             <StackLayout class="home-panel">
+                                <Label class="text" text="weather.description" @tap="enableLocationServices" />
                                 <ActivityIndicator busy="true" :visibility="weather.main ? 'collapsed' : 'visible'"	/>
                                 <StackLayout :visibility="weather.main ? 'visible' : 'collapsed'">
-                                    <Label class="titre" :text="infos.name" />
+                                    <Label class="titre" :text="this.infos.name" />
                                     <Label class="text" :text="infos.main.temp + ' °C'" />
                                     <Image :src="icon" stretch="aspectFit" class="logo" />
                                     <Label class="text" :text="weather.description"  />
@@ -89,6 +90,7 @@ export default {
     },
     created: function() {
       this.enableLocationServices();
+      alert('created');
     },
     data() {
         return {
@@ -105,8 +107,6 @@ export default {
             key: "b6907d289e10d714a6e88b30761fae22",
             url: "https://openweathermap.org/data/2.5/weather",
             icon: "",
-            mainContentText: "SideDrawer for NativeScript can be easily setup in the XML definition of your page by defining main- and drawer-content. The component" +
-                " has a default transition and position and also exposes notifications related to changes in its state. Swipe from left to open side drawer.",
         };
     },
 }
