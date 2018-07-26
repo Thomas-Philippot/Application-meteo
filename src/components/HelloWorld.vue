@@ -2,14 +2,14 @@
 	<Page class="page">
 		<ActionBar title="Météo" class="action-bar">
             <android>
-                <NavigationButton class="fa" :text="'fa-eye'| fonticon"  @tap="onOpenDrawerTap" />
+                <NavigationButton ios.systemIcon="4" android.systemIcon="ic_menu_btn_add" ios.position="left" @tap="toggleDrawer" />
             </android>
             <ios>
-                <ActionItem icon="res://ic_menu" ios.position="left" tap="showSideDrawer" />
+                <ActionItem icon="res://ic_menu" ios.position="left" tap="RevealTransition" />
             </ios>
 		</ActionBar>
         <GridLayout rows="*">
-			<RadSideDrawer ref="drawer">
+			<RadSideDrawer ref="drawer" drawerLocation="Top"  drawerTransition="PushTransition">
 				<StackLayout ~drawerContent backgroundColor="white">
 					<StackLayout height="56" style="text-align: center; vertical-align: center;">
 						<Label text="Navigation Menu" />
@@ -29,10 +29,6 @@
                                     <Label class="text" :text="infos.main.temp + ' °C'" />
                                     <Image :src="icon" stretch="aspectFit" class="logo" />
                                     <Label class="text" :text="weather.description"  />
-                                            <!-- fonticons -->
-                                            <Label class="fa" :text="'fa-bluetooth' | fonticon" />
-                                            <Label class="fa" :text="'fa-heart' | fonticon" />
-                                            <Label class="fa" :text="'fa-user' | fonticon"></Label>
                                     </StackLayout>
                         </StackLayout>
                     </ScrollView>
@@ -87,6 +83,9 @@ export default {
         onCloseDrawerTap() {
             this.$refs.drawer.nativeView.closeDrawer();
         },
+        toggleDrawer() {
+            this.$refs.drawer.nativeView.toggleDrawerState();
+        }
     },
     created: function() {
       this.enableLocationServices();
