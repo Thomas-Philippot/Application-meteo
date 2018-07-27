@@ -23,7 +23,15 @@
 				<StackLayout ~mainContent class="home-panel">
                         <ScrollView>
                             <StackLayout class="home-panel">
-                                <Label class="text" text="City Search" />
+                                <TextField :text="textFieldValue" hint="Enter City..." v-model="city" class="text-field" />
+                                <ActivityIndicator :busy="work" color="#42b983" />
+                                <StackLayout :visibility="weather.main ? 'visible' : 'collapsed'">
+                                    <Label class="titre" :text="this.infos.name" />
+                                    <Label class="text" :text="infos.main.temp + ' °C'" />
+                                    <Image :src="icon" stretch="aspectFit" class="logo" />
+                                    <Label class="text" :text="weather.description"  />
+                                </StackLayout>
+                                <Button class="button" text="City search" @tap="searchByCity" />
                         </StackLayout>
                     </ScrollView>
 				</StackLayout>
@@ -33,6 +41,8 @@
 </template>
 
 <script>
+    import axios from 'axios';
+
 export default {
     methods: {
         onOpenDrawerTap() {
@@ -43,7 +53,38 @@ export default {
         },
         toggleDrawer() {
             this.$refs.drawer.nativeView.toggleDrawerState();
+        },
+        searchByCity() {
+            this.work = true;
+            axios.get(this.url,
+                { params: {
+                    q: this.city,      
+                    appid: this.key,
+                }}       ).then(response => {
+                    try {
+                    this.work = false;
+                    this.infos = response.data;
+                    this.weather = this.infos.weather[0];
+                    this.icon = "http://openweathermap.org/img/w/" + this.weather.icon + ".png";
+                    }catch(err){
+                        this.infos = { main: {}};
+                        this.weather = {};
+                    }
+                }).catch( (err) =>{
+                  console.log(err);
+                });
         }
+    },
+    data() {
+        return {
+            city: "",
+            weather: {},
+            infos: { main: {}},
+            key: "b6907d289e10d714a6e88b30761fae22",
+            url: "https://openweathermap.org/data/2.5/weather",
+            icon: "",
+            work: false,
+        };
     },
 }
 </script>
@@ -82,7 +123,12 @@ export default {
     }
     .button {
         width: 50%;
-        background-color: #3e5bfe;
+        background-color: #42b983;
         color: white;
+    }
+    .text-field {
+        color: black;
+        background-color: white;
+        text-align: center;
     }
 </style>

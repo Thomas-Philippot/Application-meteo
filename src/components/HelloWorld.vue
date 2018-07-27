@@ -23,8 +23,8 @@
 				<StackLayout ~mainContent class="home-panel">
                         <ScrollView>
                             <StackLayout class="home-panel">
-                                <Label class="text" text="weather.description" @tap="enableLocationServices" />
-                                <ActivityIndicator busy="true" :visibility="weather.main ? 'collapsed' : 'visible'"	/>
+                                <Label class="text" text="Click here..." @tap="enableLocationServices" />
+                                <ActivityIndicator :busy="work" color="#42b983"/>
                                 <StackLayout :visibility="weather.main ? 'visible' : 'collapsed'">
                                     <Label class="titre" :text="this.infos.name" />
                                     <Label class="text" :text="infos.main.temp + ' °C'" />
@@ -45,6 +45,10 @@
     import axios from 'axios';
     require("nativescript-vue").registerElement("RadSideDrawer", () => require("nativescript-ui-sidedrawer").RadSideDrawer);
 export default {
+    created() {
+      this.enableLocationServices();
+      alert('created');
+    },
     methods: {
         enableLocationServices: function() {
             geoLocation.isEnabled().then(enabled => {
@@ -64,6 +68,7 @@ export default {
                     lon: this.currentGeoLocation.longitude,      
                     appid: this.key,
                 }}       ).then(response => {
+                    this.work = false;
                     this.infos = response.data;
                     this.weather = this.infos.weather[0];
                     this.icon = "http://openweathermap.org/img/w/" + this.weather.icon + ".png";
@@ -88,10 +93,6 @@ export default {
             this.$refs.drawer.nativeView.toggleDrawerState();
         }
     },
-    created: function() {
-      this.enableLocationServices();
-      alert('created');
-    },
     data() {
         return {
             currentGeoLocation: {
@@ -107,6 +108,7 @@ export default {
             key: "b6907d289e10d714a6e88b30761fae22",
             url: "https://openweathermap.org/data/2.5/weather",
             icon: "",
+            work: true,
         };
     },
 }
@@ -143,10 +145,5 @@ export default {
         margin-bottom: 20px;
         width: 200px;
         height: 200px;
-    }
-    .button {
-        width: 50%;
-        background-color: #3e5bfe;
-        color: white;
     }
 </style>

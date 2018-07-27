@@ -20,6 +20,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   pageRouting: true,
+
   routes: [
     {path: '/master', component: HelloWorld},
     {path: '/city', component: City},
