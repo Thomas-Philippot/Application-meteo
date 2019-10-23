@@ -19,7 +19,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
     "axios": "^0.18.1",
-    "nativescript-fonticon": "^1.1.1",
+    "nativescript-fonticon": "^2.0.0",
     "nativescript-geolocation": "^5.1.0",
     "nativescript-theme-core": "^2.0.24",
     "nativescript-ui-sidedrawer": "^7.0.4",
