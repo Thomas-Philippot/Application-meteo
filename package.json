@@ -23,7 +23,7 @@
     "nativescript-geolocation": "^5.1.0",
     "nativescript-theme-core": "^2.0.24",
     "nativescript-ui-sidedrawer": "^8.0.0",
-    "nativescript-vue": "^2.5.0",
+    "nativescript-vue": "^2.8.3",
     "tns-core-modules": "~6.4.2",
     "vue-router": "^3.1.6"
   },
