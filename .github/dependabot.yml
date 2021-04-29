@@ -1,0 +1,34 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "10:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: tns-core-modules
+    versions:
+    - 6.5.24
+    - 6.5.25
+    - 6.5.26
+  - dependency-name: nativescript-vue-template-compiler
+    versions:
+    - 2.7.2
+    - 2.8.3
+    - 2.8.4
+  - dependency-name: nativescript-vue
+    versions:
+    - 2.7.2
+    - 2.8.3
+    - 2.8.4
+  - dependency-name: "@fortawesome/fontawesome-free"
+    versions:
+    - 5.15.2
+  - dependency-name: lodash
+    versions:
+    - 4.17.20
+  - dependency-name: elliptic
+    versions:
+    - 6.5.3
