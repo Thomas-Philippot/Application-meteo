@@ -17,7 +17,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.12.1",
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "axios": "^0.21.1",
     "nativescript-fonticon": "^2.0.0",
     "nativescript-geolocation": "^5.1.0",
