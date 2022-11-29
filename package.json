@@ -35,7 +35,7 @@
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^3.0.2",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^11.0.0",
     "nativescript-vue-externals": "^0.2.0",
     "nativescript-vue-loader": "^0.1.5",
     "nativescript-vue-target": "^0.1.0",
